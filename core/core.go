@@ -11,12 +11,15 @@ package core
 
 import (
 	"context"
+	"encoding/json"
 	"io"
 
 	"github.com/ipfs/go-filestore"
 	"github.com/ipfs/go-ipfs-pinner"
 
 	bserv "github.com/ipfs/go-blockservice"
+	"github.com/ipfs/go-ipfs/config"
+	"github.com/ipfs/go-datastore"
 	"github.com/ipfs/go-fetcher"
 	"github.com/ipfs/go-graphsync"
 	bstore "github.com/ipfs/go-ipfs-blockstore"
@@ -161,11 +164,32 @@ func (n *IpfsNode) Bootstrap(cfg bootstrap.BootstrapConfig) error {
 			return ps
 		}
 	}
+	if cfg.SaveTempPeersForBootstrap == nil {
+		cfg.SaveTempPeersForBootstrap = func(ctx context.Context, peerList []peer.AddrInfo) {
+			err := n.saveTempBootstrapPeers(ctx, peerList)
+			if err != nil {
+				log.Warnf("saveTempBootstrapPeers failed: %s", err)
+				return
+			}
+		}
+	}
+	if cfg.LoadTempPeersForBootstrap == nil {
+		cfg.LoadTempPeersForBootstrap = func(ctx context.Context) []peer.AddrInfo {
+			peerList, err := n.loadTempBootstrapPeers(ctx)
+			if err != nil {
+				log.Warnf("loadTempBootstrapPeers failed: %s", err)
+				return nil
+			}
+			return peerList
+		}
+	}
 
 	var err error
 	n.Bootstrapper, err = bootstrap.Bootstrap(n.Identity, n.PeerHost, n.Routing, cfg)
 	return err
 }
+
+var TempBootstrapPeersKey = datastore.NewKey("/local/temp_bootstrap_peers")
 
 func (n *IpfsNode) loadBootstrapPeers() ([]peer.AddrInfo, error) {
 	cfg, err := n.Repo.Config()
@@ -174,6 +198,33 @@ func (n *IpfsNode) loadBootstrapPeers() ([]peer.AddrInfo, error) {
 	}
 
 	return cfg.BootstrapPeers()
+}
+
+func (n *IpfsNode) saveTempBootstrapPeers(ctx context.Context, peerList []peer.AddrInfo) error {
+	ds := n.Repo.Datastore()
+	bytes, err := json.Marshal(config.BootstrapPeerStrings(peerList))
+	if err != nil {
+		return err
+	}
+
+	if err := ds.Put(ctx, TempBootstrapPeersKey, bytes); err != nil {
+		return err
+	}
+	return ds.Sync(ctx, TempBootstrapPeersKey)
+}
+
+func (n *IpfsNode) loadTempBootstrapPeers(ctx context.Context) ([]peer.AddrInfo, error) {
+	ds := n.Repo.Datastore()
+	bytes, err := ds.Get(ctx, TempBootstrapPeersKey)
+	if err != nil {
+		return nil, err
+	}
+
+	var addrs []string
+	if err := json.Unmarshal(bytes, &addrs); err != nil {
+		return nil, err
+	}
+	return config.ParseBootstrapPeers(addrs)
 }
 
 type ConstructPeerHostOpts struct {

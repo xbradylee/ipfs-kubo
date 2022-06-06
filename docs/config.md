@@ -1035,6 +1035,8 @@ Default: `cache`
 
 ## `Mounts`
 
+**EXPERIMENTAL:** read about current limitations at [fuse.md](./fuse.md).
+
 FUSE mount point configuration options.
 
 ### `Mounts.IPFS`
@@ -1635,7 +1637,7 @@ and tracking recource usage over time.
 Enables the libp2p Network Resource Manager and auguments the default limits
 using user-defined ones in `Swarm.ResourceMgr.Limits` (if present).
 
-Default: `true`
+Default: `false`
 
 Type: `flag`
 

@@ -79,7 +79,7 @@ var swarmPeeringCmd = &cmds.Command{
 		Tagline: "Modify the peering subsystem.",
 		ShortDescription: `
 'ipfs swarm peering' manages the peering subsystem. 
-Peers in the peering subsystem is maintained to be connected, reconnected 
+Peers in the peering subsystem are maintained to be connected, reconnected 
 on disconnect with a back-off.
 The changes are not saved to the config.
 `,
@@ -409,7 +409,7 @@ Changes made via command line are persisted in the Swarm.ResourceMgr.Limits fiel
 					return errors.New("expected a JSON file")
 				}
 				if err := json.NewDecoder(file).Decode(&newLimit); err != nil {
-					return errors.New("failed to decode JSON as ResourceMgrScopeConfig")
+					return fmt.Errorf("decoding JSON as ResourceMgrScopeConfig: %w", err)
 				}
 				return libp2p.NetSetLimit(node.ResourceManager, node.Repo, scope, newLimit)
 			}

@@ -226,7 +226,7 @@ func HostnameOption() ServeOption {
 			if !cfg.Gateway.NoDNSLink && isDNSLinkName(r.Context(), coreAPI, host) {
 				// rewrite path and handle as DNSLink
 				r.URL.Path = "/ipns/" + stripPort(host) + r.URL.Path
-				ctx := context.WithValue(r.Context(), gateway.RequestContextKey("dnslink-hostname"), host)
+				ctx := context.WithValue(r.Context(), gateway.DNSLinkHostnameKey, host)
 				childMux.ServeHTTP(w, withHostnameContext(r.WithContext(ctx), host))
 				return
 			}
@@ -256,7 +256,7 @@ func withHostnameContext(r *http.Request, hostname string) *http.Request {
 	// Host header, subdomain gateways have more comples rules (knownSubdomainDetails)
 	// More: https://github.com/ipfs/dir-index-html/issues/42
 	// nolint: staticcheck // non-backward compatible change
-	ctx := context.WithValue(r.Context(), gateway.RequestContextKey("gw-hostname"), hostname)
+	ctx := context.WithValue(r.Context(), gateway.GatewayHostnameKey, hostname)
 	return r.WithContext(ctx)
 }
 

@@ -196,8 +196,8 @@ func (i *gatewayHandler) serve4xx(w http.ResponseWriter, r *http.Request, conten
 }
 
 func hasOriginIsolation(r *http.Request) bool {
-	_, gw := r.Context().Value(RequestContextKey("gw-hostname")).(string)
-	_, dnslink := r.Context().Value("dnslink-hostname").(string)
+	_, gw := r.Context().Value(GatewayHostnameKey).(string)
+	_, dnslink := r.Context().Value(DNSLinkHostnameKey).(string)
 
 	if gw || dnslink {
 		return true

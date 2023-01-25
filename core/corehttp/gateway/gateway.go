@@ -92,3 +92,10 @@ func AddAccessControlHeaders(headers map[string][]string) {
 			"X-Ipfs-Roots",
 		}, headers[ACEHeadersName]...))
 }
+
+type RequestContextKey string
+
+const (
+	DNSLinkHostnameKey RequestContextKey = "dnslink-hostname"
+	GatewayHostnameKey RequestContextKey = "gw-hostname"
+)

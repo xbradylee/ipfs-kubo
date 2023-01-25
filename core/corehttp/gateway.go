@@ -38,7 +38,7 @@ func GatewayOption(writable bool, paths ...string) ServeOption {
 			return nil, err
 		}
 
-		gateway := gateway.NewGatewayHandler(gateway.GatewayConfig{
+		gateway := gateway.NewHandler(gateway.Config{
 			Headers:  headers,
 			Writable: writable,
 		}, api, offlineAPI)

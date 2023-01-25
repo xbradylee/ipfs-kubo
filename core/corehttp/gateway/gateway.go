@@ -9,7 +9,9 @@ import (
 	path "github.com/ipfs/interface-go-ipfs-core/path"
 )
 
-type GatewayConfig struct {
+// Config is the configuration that will be applied when creating a new gateway
+// handler.
+type Config struct {
 	Headers  map[string][]string
 	Writable bool
 }

@@ -18,7 +18,7 @@ import (
 )
 
 // serveCAR returns a CAR stream for specific DAG+selector
-func (i *gatewayHandler) serveCAR(ctx context.Context, w http.ResponseWriter, r *http.Request, resolvedPath ipath.Resolved, contentPath ipath.Path, carVersion string, begin time.Time) {
+func (i *handler) serveCAR(ctx context.Context, w http.ResponseWriter, r *http.Request, resolvedPath ipath.Resolved, contentPath ipath.Path, carVersion string, begin time.Time) {
 	ctx, span := tracing.Span(ctx, "Gateway", "ServeCAR", trace.WithAttributes(attribute.String("path", resolvedPath.String())))
 	defer span.End()
 	ctx, cancel := context.WithCancel(ctx)

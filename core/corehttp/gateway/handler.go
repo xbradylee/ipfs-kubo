@@ -67,10 +67,10 @@ type redirectTemplateData struct {
 	ErrorMsg      string
 }
 
-// gatewayHandler is a HTTP handler that serves IPFS objects (accessible by default at /ipfs/<path>)
+// handler is a HTTP handler that serves IPFS objects (accessible by default at /ipfs/<path>)
 // (it serves requests like GET /ipfs/QmVRzPKPzNtSrEzBFm2UZfxmPAgnaLke4DMcerbsGGSaFe/link)
-type gatewayHandler struct {
-	config     GatewayConfig
+type handler struct {
+	config     Config
 	api        NodeAPI
 	offlineAPI NodeAPI
 
@@ -216,14 +216,14 @@ func newGatewayHistogramMetric(name string, help string) *prometheus.HistogramVe
 	return histogramMetric
 }
 
-// NewGatewayHandler returns an http.Handler that can act as a gateway to IPFS content
+// NewHandler returns an http.Handler that can act as a gateway to IPFS content
 // offlineApi is a version of the API that should not make network requests for missing data
-func NewGatewayHandler(c GatewayConfig, api NodeAPI, offlineAPI NodeAPI) http.Handler {
-	return newGatewayHandler(c, api, offlineAPI)
+func NewHandler(c Config, api NodeAPI, offlineAPI NodeAPI) http.Handler {
+	return newHandler(c, api, offlineAPI)
 }
 
-func newGatewayHandler(c GatewayConfig, api NodeAPI, offlineAPI NodeAPI) *gatewayHandler {
-	i := &gatewayHandler{
+func newHandler(c Config, api NodeAPI, offlineAPI NodeAPI) *handler {
+	i := &handler{
 		config:     c,
 		api:        api,
 		offlineAPI: offlineAPI,
@@ -290,7 +290,7 @@ func parseIpfsPath(p string) (cid.Cid, string, error) {
 	return rootCid, path.Join(rsegs[2:]), nil
 }
 
-func (i *gatewayHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (i *handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// the hour is a hard fallback, we don't expect it to happen, but just in case
 	ctx, cancel := context.WithTimeout(r.Context(), time.Hour)
 	defer cancel()
@@ -342,7 +342,7 @@ func (i *gatewayHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, errmsg, status)
 }
 
-func (i *gatewayHandler) optionsHandler(w http.ResponseWriter, r *http.Request) {
+func (i *handler) optionsHandler(w http.ResponseWriter, r *http.Request) {
 	/*
 		OPTIONS is a noop request that is used by the browsers to check
 		if server accepts cross-site XMLHttpRequest (indicated by the presence of CORS headers)
@@ -351,7 +351,7 @@ func (i *gatewayHandler) optionsHandler(w http.ResponseWriter, r *http.Request) 
 	i.addUserHeaders(w) // return all custom headers (including CORS ones, if set)
 }
 
-func (i *gatewayHandler) getOrHeadHandler(w http.ResponseWriter, r *http.Request) {
+func (i *handler) getOrHeadHandler(w http.ResponseWriter, r *http.Request) {
 	begin := time.Now()
 
 	logger := log.With("from", r.RequestURI)
@@ -455,7 +455,7 @@ func (i *gatewayHandler) getOrHeadHandler(w http.ResponseWriter, r *http.Request
 	}
 }
 
-func (i *gatewayHandler) postHandler(w http.ResponseWriter, r *http.Request) {
+func (i *handler) postHandler(w http.ResponseWriter, r *http.Request) {
 	p, err := i.api.Unixfs().Add(r.Context(), files.NewReaderFile(r.Body))
 	if err != nil {
 		internalWebError(w, err)
@@ -468,7 +468,7 @@ func (i *gatewayHandler) postHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, p.String(), http.StatusCreated)
 }
 
-func (i *gatewayHandler) putHandler(w http.ResponseWriter, r *http.Request) {
+func (i *handler) putHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	ds := i.api.Dag()
 
@@ -563,7 +563,7 @@ func (i *gatewayHandler) putHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, redirectURL, http.StatusCreated)
 }
 
-func (i *gatewayHandler) deleteHandler(w http.ResponseWriter, r *http.Request) {
+func (i *handler) deleteHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
 	// parse the path
@@ -639,7 +639,7 @@ func (i *gatewayHandler) deleteHandler(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, redirectURL, http.StatusCreated)
 }
 
-func (i *gatewayHandler) addUserHeaders(w http.ResponseWriter) {
+func (i *handler) addUserHeaders(w http.ResponseWriter) {
 	for k, v := range i.config.Headers {
 		w.Header()[k] = v
 	}
@@ -706,7 +706,7 @@ func setContentDispositionHeader(w http.ResponseWriter, filename string, disposi
 }
 
 // Set X-Ipfs-Roots with logical CID array for efficient HTTP cache invalidation.
-func (i *gatewayHandler) buildIpfsRootsHeader(contentPath string, r *http.Request) (string, error) {
+func (i *handler) buildIpfsRootsHeader(contentPath string, r *http.Request) (string, error) {
 	/*
 		These are logical roots where each CID represent one path segment
 		and resolves to either a directory or the root block of a file.
@@ -927,7 +927,7 @@ func debugStr(path string) string {
 // Resolve the provided contentPath including any special handling related to
 // the requested responseFormat. Returned ok flag indicates if gateway handler
 // should continue processing the request.
-func (i *gatewayHandler) handlePathResolution(w http.ResponseWriter, r *http.Request, responseFormat string, contentPath ipath.Path, logger *zap.SugaredLogger) (resolvedPath ipath.Resolved, newContentPath ipath.Path, ok bool) {
+func (i *handler) handlePathResolution(w http.ResponseWriter, r *http.Request, responseFormat string, contentPath ipath.Path, logger *zap.SugaredLogger) (resolvedPath ipath.Resolved, newContentPath ipath.Path, ok bool) {
 	// Attempt to resolve the provided path.
 	resolvedPath, err := i.api.ResolvePath(r.Context(), contentPath)
 
@@ -969,7 +969,7 @@ func (i *gatewayHandler) handlePathResolution(w http.ResponseWriter, r *http.Req
 
 // Detect 'Cache-Control: only-if-cached' in request and return data if it is already in the local datastore.
 // https://github.com/ipfs/specs/blob/main/http-gateways/PATH_GATEWAY.md#cache-control-request-header
-func (i *gatewayHandler) handleOnlyIfCached(w http.ResponseWriter, r *http.Request, contentPath ipath.Path, logger *zap.SugaredLogger) (requestHandled bool) {
+func (i *handler) handleOnlyIfCached(w http.ResponseWriter, r *http.Request, contentPath ipath.Path, logger *zap.SugaredLogger) (requestHandled bool) {
 	if r.Header.Get("Cache-Control") == "only-if-cached" {
 		_, err := i.offlineAPI.Block().Stat(r.Context(), contentPath)
 		if err != nil {
@@ -1086,7 +1086,7 @@ func handleSuperfluousNamespace(w http.ResponseWriter, r *http.Request, contentP
 	return true
 }
 
-func (i *gatewayHandler) handleGettingFirstBlock(r *http.Request, begin time.Time, contentPath ipath.Path, resolvedPath ipath.Resolved) *requestError {
+func (i *handler) handleGettingFirstBlock(r *http.Request, begin time.Time, contentPath ipath.Path, resolvedPath ipath.Resolved) *requestError {
 	// Update the global metric of the time it takes to read the final root block of the requested resource
 	// NOTE: for legacy reasons this happens before we go into content-type specific code paths
 	_, err := i.api.Block().Get(r.Context(), resolvedPath)
@@ -1100,7 +1100,7 @@ func (i *gatewayHandler) handleGettingFirstBlock(r *http.Request, begin time.Tim
 	return nil
 }
 
-func (i *gatewayHandler) setCommonHeaders(w http.ResponseWriter, r *http.Request, contentPath ipath.Path) *requestError {
+func (i *handler) setCommonHeaders(w http.ResponseWriter, r *http.Request, contentPath ipath.Path) *requestError {
 	i.addUserHeaders(w) // ok, _now_ write user's headers.
 	w.Header().Set("X-Ipfs-Path", contentPath.String())
 

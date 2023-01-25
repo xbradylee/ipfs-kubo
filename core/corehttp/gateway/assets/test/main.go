@@ -88,8 +88,8 @@ func main() {
 					return "ipfs-_blank" // place-holder
 				},
 				"urlEscape": func(rawUrl string) string {
-					pathUrl := url.URL{Path: rawUrl}
-					return pathUrl.String()
+					pathURL := url.URL{Path: rawUrl}
+					return pathURL.String()
 				},
 			}).ParseFiles(directoryTemplateFile)
 			if err != nil {
@@ -122,5 +122,5 @@ func main() {
 	}
 
 	fmt.Printf("listening on localhost:3000\n")
-	http.ListenAndServe("localhost:3000", mux)
+	_ = http.ListenAndServe("localhost:3000", mux)
 }

@@ -118,7 +118,7 @@ func (i *gatewayHandler) serveDirectory(ctx context.Context, w http.ResponseWrit
 		return
 	}
 
-	dirListing := make([]directoryItem, 0, len(results))
+	dirListing := make([]assets.DirectoryItem, 0, len(results))
 	for link := range results {
 		if link.Err != nil {
 			internalWebError(w, err)
@@ -126,12 +126,12 @@ func (i *gatewayHandler) serveDirectory(ctx context.Context, w http.ResponseWrit
 		}
 
 		hash := link.Cid.String()
-		di := directoryItem{
+		di := assets.DirectoryItem{
 			Size:      humanize.Bytes(uint64(link.Size)),
 			Name:      link.Name,
 			Path:      gopath.Join(originalURLPath, link.Name),
 			Hash:      hash,
-			ShortHash: shortHash(hash),
+			ShortHash: assets.ShortHash(hash),
 		}
 		dirListing = append(dirListing, di)
 	}
@@ -180,23 +180,23 @@ func (i *gatewayHandler) serveDirectory(ctx context.Context, w http.ResponseWrit
 		gwURL = ""
 	}
 
-	dnslink := hasDNSLinkOrigin(gwURL, contentPath.String())
+	dnslink := assets.HasDNSLinkOrigin(gwURL, contentPath.String())
 
 	// See comment above where originalUrlPath is declared.
-	tplData := listingTemplateData{
+	tplData := assets.DirectoryTemplateData{
 		GatewayURL:  gwURL,
 		DNSLink:     dnslink,
 		Listing:     dirListing,
 		Size:        size,
 		Path:        contentPath.String(),
-		Breadcrumbs: breadcrumbs(contentPath.String(), dnslink),
+		Breadcrumbs: assets.Breadcrumbs(contentPath.String(), dnslink),
 		BackLink:    backLink,
 		Hash:        hash,
 	}
 
 	logger.Debugw("request processed", "tplDataDNSLink", dnslink, "tplDataSize", size, "tplDataBackLink", backLink, "tplDataHash", hash)
 
-	if err := listingTemplate.Execute(w, tplData); err != nil {
+	if err := assets.DirectoryTemplate.Execute(w, tplData); err != nil {
 		internalWebError(w, err)
 		return
 	}

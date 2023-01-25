@@ -14,7 +14,6 @@ import (
 	ipldlegacy "github.com/ipfs/go-ipld-legacy"
 	ipath "github.com/ipfs/interface-go-ipfs-core/path"
 	"github.com/ipfs/kubo/core/corehttp/gateway/assets"
-	dih "github.com/ipfs/kubo/core/corehttp/gateway/assets/dag-index-html"
 	"github.com/ipfs/kubo/tracing"
 	"github.com/ipld/go-ipld-prime"
 	"github.com/ipld/go-ipld-prime/multicodec"
@@ -152,7 +151,7 @@ func (i *gatewayHandler) serveCodecHTML(ctx context.Context, w http.ResponseWrit
 	w.Header().Del("Cache-Control")
 
 	cidCodec := mc.Code(resolvedPath.Cid().Prefix().Codec)
-	if err := dih.DagIndexTemplate.Execute(w, dih.DagIndexTemplateData{
+	if err := assets.DagTemplate.Execute(w, assets.DagTemplateData{
 		Path:      contentPath.String(),
 		CID:       resolvedPath.Cid().String(),
 		CodecName: cidCodec.String(),

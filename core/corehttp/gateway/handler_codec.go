@@ -14,7 +14,6 @@ import (
 	ipldlegacy "github.com/ipfs/go-ipld-legacy"
 	ipath "github.com/ipfs/interface-go-ipfs-core/path"
 	"github.com/ipfs/kubo/core/corehttp/gateway/assets"
-	"github.com/ipfs/kubo/tracing"
 	"github.com/ipld/go-ipld-prime"
 	"github.com/ipld/go-ipld-prime/multicodec"
 	mc "github.com/multiformats/go-multicodec"
@@ -55,7 +54,7 @@ var contentTypeToExtension = map[string]string{
 }
 
 func (i *handler) serveCodec(ctx context.Context, w http.ResponseWriter, r *http.Request, resolvedPath ipath.Resolved, contentPath ipath.Path, begin time.Time, requestedContentType string) {
-	ctx, span := tracing.Span(ctx, "Gateway", "ServeCodec", trace.WithAttributes(attribute.String("path", resolvedPath.String()), attribute.String("requestedContentType", requestedContentType)))
+	ctx, span := spanTrace(ctx, "ServeCodec", trace.WithAttributes(attribute.String("path", resolvedPath.String()), attribute.String("requestedContentType", requestedContentType)))
 	defer span.End()
 
 	cidCodec := mc.Code(resolvedPath.Cid().Prefix().Codec)

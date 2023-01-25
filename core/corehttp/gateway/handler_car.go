@@ -10,7 +10,6 @@ import (
 	blocks "github.com/ipfs/go-libipfs/blocks"
 	coreiface "github.com/ipfs/interface-go-ipfs-core"
 	ipath "github.com/ipfs/interface-go-ipfs-core/path"
-	"github.com/ipfs/kubo/tracing"
 	gocar "github.com/ipld/go-car"
 	selectorparse "github.com/ipld/go-ipld-prime/traversal/selector/parse"
 	"go.opentelemetry.io/otel/attribute"
@@ -19,7 +18,7 @@ import (
 
 // serveCAR returns a CAR stream for specific DAG+selector
 func (i *handler) serveCAR(ctx context.Context, w http.ResponseWriter, r *http.Request, resolvedPath ipath.Resolved, contentPath ipath.Path, carVersion string, begin time.Time) {
-	ctx, span := tracing.Span(ctx, "Gateway", "ServeCAR", trace.WithAttributes(attribute.String("path", resolvedPath.String())))
+	ctx, span := spanTrace(ctx, "ServeCAR", trace.WithAttributes(attribute.String("path", resolvedPath.String())))
 	defer span.End()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()

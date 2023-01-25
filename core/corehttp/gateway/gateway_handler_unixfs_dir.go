@@ -1,4 +1,4 @@
-package corehttp
+package gateway
 
 import (
 	"context"
@@ -174,7 +174,7 @@ func (i *gatewayHandler) serveDirectory(ctx context.Context, w http.ResponseWrit
 	var gwURL string
 
 	// Get gateway hostname and build gateway URL.
-	if h, ok := r.Context().Value(requestContextKey("gw-hostname")).(string); ok {
+	if h, ok := r.Context().Value(RequestContextKey("gw-hostname")).(string); ok {
 		gwURL = "//" + h
 	} else {
 		gwURL = ""

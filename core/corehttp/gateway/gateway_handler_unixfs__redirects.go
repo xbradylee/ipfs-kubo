@@ -1,4 +1,4 @@
-package corehttp
+package gateway
 
 import (
 	"fmt"
@@ -196,7 +196,7 @@ func (i *gatewayHandler) serve4xx(w http.ResponseWriter, r *http.Request, conten
 }
 
 func hasOriginIsolation(r *http.Request) bool {
-	_, gw := r.Context().Value(requestContextKey("gw-hostname")).(string)
+	_, gw := r.Context().Value(RequestContextKey("gw-hostname")).(string)
 	_, dnslink := r.Context().Value("dnslink-hostname").(string)
 
 	if gw || dnslink {

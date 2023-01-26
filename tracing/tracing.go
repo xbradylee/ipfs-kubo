@@ -10,8 +10,7 @@ import (
 	version "github.com/ipfs/kubo"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/exporters/jaeger"
-	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
-	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
+
 	"go.opentelemetry.io/otel/exporters/zipkin"
 	"go.opentelemetry.io/otel/sdk/resource"
 	"go.opentelemetry.io/otel/sdk/trace"
@@ -53,18 +52,6 @@ func buildExporters(ctx context.Context) ([]trace.SpanExporter, error) {
 			}
 
 			switch protocol {
-			case "http/protobuf":
-				exporter, err := otlptracehttp.New(ctx)
-				if err != nil {
-					return nil, fmt.Errorf("building OTLP HTTP exporter: %w", err)
-				}
-				exporters = append(exporters, exporter)
-			case "grpc":
-				exporter, err := otlptracegrpc.New(ctx)
-				if err != nil {
-					return nil, fmt.Errorf("building OTLP gRPC exporter: %w", err)
-				}
-				exporters = append(exporters, exporter)
 			default:
 				return nil, fmt.Errorf("unknown or unsupported OTLP exporter '%s'", exporterStr)
 			}

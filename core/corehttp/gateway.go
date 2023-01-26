@@ -10,10 +10,10 @@ import (
 	coreiface "github.com/ipfs/interface-go-ipfs-core"
 	options "github.com/ipfs/interface-go-ipfs-core/options"
 	path "github.com/ipfs/interface-go-ipfs-core/path"
-	version "github.com/ipfs/kubo"
+	id "github.com/libp2p/go-libp2p/p2p/protocol/identify"
+	version "github.com/xbradylee/ipfs-kubo"
 	core "github.com/xbradylee/ipfs-kubo/core"
 	coreapi "github.com/xbradylee/ipfs-kubo/core/coreapi"
-	id "github.com/libp2p/go-libp2p/p2p/protocol/identify"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 

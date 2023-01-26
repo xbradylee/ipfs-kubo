@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	version "github.com/ipfs/kubo"
+	version "github.com/xbradylee/ipfs-kubo"
 	oldcmds "github.com/xbradylee/ipfs-kubo/commands"
 	"github.com/xbradylee/ipfs-kubo/core"
 	corecommands "github.com/xbradylee/ipfs-kubo/core/commands"

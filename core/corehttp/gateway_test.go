@@ -12,7 +12,7 @@ import (
 	"time"
 
 	namesys "github.com/ipfs/go-namesys"
-	version "github.com/ipfs/kubo"
+	version "github.com/xbradylee/ipfs-kubo"
 	core "github.com/xbradylee/ipfs-kubo/core"
 	"github.com/xbradylee/ipfs-kubo/core/coreapi"
 	repo "github.com/xbradylee/ipfs-kubo/repo"

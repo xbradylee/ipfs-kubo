@@ -134,13 +134,13 @@ Finally, we'll build and test `ipfs` itself.
 
 CMD:
 ```bat
-go install -ldflags="-X "github.com/ipfs/kubo".CurrentCommit=%SHA%"
+go install -ldflags="-X "github.com/xbradylee/ipfs-kubo".CurrentCommit=%SHA%"
 %GOPATH%\bin\ipfs.exe version --all
 ```
 
 PowerShell:
 ```powershell
-go install -ldflags="-X "github.com/ipfs/kubo".CurrentCommit=$env:SHA"
+go install -ldflags="-X "github.com/xbradylee/ipfs-kubo".CurrentCommit=$env:SHA"
 cp ./ipfs.exe $env:GOPATH/bin/ipfs.exe -force
 . $env:GOPATH/bin/ipfs.exe version --all
 ```

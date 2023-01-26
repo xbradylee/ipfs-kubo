@@ -15,7 +15,10 @@ import (
 
 	multierror "github.com/hashicorp/go-multierror"
 
-	version "github.com/ipfs/kubo"
+	p2pcrypto "github.com/libp2p/go-libp2p/core/crypto"
+	pnet "github.com/libp2p/go-libp2p/core/pnet"
+	sockets "github.com/libp2p/go-socket-activation"
+	version "github.com/xbradylee/ipfs-kubo"
 	utilmain "github.com/xbradylee/ipfs-kubo/cmd/ipfs/util"
 	oldcmds "github.com/xbradylee/ipfs-kubo/commands"
 	config "github.com/xbradylee/ipfs-kubo/config"
@@ -30,9 +33,6 @@ import (
 	fsrepo "github.com/xbradylee/ipfs-kubo/repo/fsrepo"
 	"github.com/xbradylee/ipfs-kubo/repo/fsrepo/migrations"
 	"github.com/xbradylee/ipfs-kubo/repo/fsrepo/migrations/ipfsfetcher"
-	p2pcrypto "github.com/libp2p/go-libp2p/core/crypto"
-	pnet "github.com/libp2p/go-libp2p/core/pnet"
-	sockets "github.com/libp2p/go-socket-activation"
 
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	mprome "github.com/ipfs/go-metrics-prometheus"

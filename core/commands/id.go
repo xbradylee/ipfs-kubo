@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	version "github.com/ipfs/kubo"
+	version "github.com/xbradylee/ipfs-kubo"
 	core "github.com/xbradylee/ipfs-kubo/core"
 	cmdenv "github.com/xbradylee/ipfs-kubo/core/commands/cmdenv"
 

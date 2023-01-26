@@ -7,8 +7,8 @@ import (
 	"github.com/ipfs/go-cid"
 	ipldlegacy "github.com/ipfs/go-ipld-legacy"
 	blocks "github.com/ipfs/go-libipfs/blocks"
-	"github.com/ipfs/kubo/core/commands/cmdenv"
-	"github.com/ipfs/kubo/core/commands/cmdutils"
+	"github.com/xbradylee/ipfs-kubo/core/commands/cmdenv"
+	"github.com/xbradylee/ipfs-kubo/core/commands/cmdutils"
 	"github.com/ipld/go-ipld-prime/multicodec"
 	basicnode "github.com/ipld/go-ipld-prime/node/basic"
 

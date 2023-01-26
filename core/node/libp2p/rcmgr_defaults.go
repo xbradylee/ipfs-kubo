@@ -8,8 +8,8 @@ import (
 	rcmgr "github.com/libp2p/go-libp2p/p2p/host/resource-manager"
 	"github.com/pbnjay/memory"
 
-	"github.com/ipfs/kubo/config"
-	"github.com/ipfs/kubo/core/node/libp2p/fd"
+	"github.com/xbradylee/ipfs-kubo/config"
+	"github.com/xbradylee/ipfs-kubo/core/node/libp2p/fd"
 )
 
 // We are doing some magic when parsing config files (we are using a map[string]interface{} to compare config files).
@@ -189,7 +189,7 @@ Run 'ipfs swarm limit all' to see the resulting limits.
 	// Simple checks to overide autoscaling ensuring limits make sense versus the connmgr values.
 	// There are ways to break this, but this should catch most problems already.
 	// We might improve this in the future.
-	// See: https://github.com/ipfs/kubo/issues/9545
+	// See: https://github.com/xbradylee/ipfs-kubo/issues/9545
 	if cfg.ConnMgr.Type.WithDefault(config.DefaultConnMgrType) != "none" {
 		maxInboundConns := int64(defaultLimitConfig.System.ConnsInbound)
 		if connmgrHighWaterTimesTwo := cfg.ConnMgr.HighWater.WithDefault(config.DefaultConnMgrHighWater) * 2; maxInboundConns < connmgrHighWaterTimesTwo {

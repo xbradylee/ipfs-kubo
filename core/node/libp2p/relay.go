@@ -3,11 +3,11 @@ package libp2p
 import (
 	"context"
 
-	"github.com/ipfs/kubo/config"
 	"github.com/libp2p/go-libp2p"
 	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/libp2p/go-libp2p/p2p/host/autorelay"
 	"github.com/libp2p/go-libp2p/p2p/protocol/circuitv2/relay"
+	"github.com/xbradylee/ipfs-kubo/config"
 	"go.uber.org/fx"
 )
 

@@ -12,11 +12,11 @@ import (
 	"time"
 
 	logging "github.com/ipfs/go-log"
-	core "github.com/ipfs/kubo/core"
 	"github.com/jbenet/goprocess"
 	periodicproc "github.com/jbenet/goprocess/periodic"
 	ma "github.com/multiformats/go-multiaddr"
 	manet "github.com/multiformats/go-multiaddr/net"
+	core "github.com/xbradylee/ipfs-kubo/core"
 )
 
 var log = logging.Logger("core/server")

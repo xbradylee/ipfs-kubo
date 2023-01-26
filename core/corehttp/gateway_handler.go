@@ -191,7 +191,7 @@ func newGatewaySummaryMetric(name string, help string) *prometheus.SummaryVec {
 
 func newGatewayHistogramMetric(name string, help string) *prometheus.HistogramVec {
 	// We can add buckets as a parameter in the future, but for now using static defaults
-	// suggested in https://github.com/ipfs/kubo/issues/8441
+	// suggested in https://github.com/xbradylee/ipfs-kubo/issues/8441
 	defaultBuckets := []float64{0.05, 0.1, 0.25, 0.5, 1, 2, 5, 10, 30, 60}
 	histogramMetric := prometheus.NewHistogramVec(
 		prometheus.HistogramOpts{
@@ -651,11 +651,11 @@ func addCacheControlHeaders(w http.ResponseWriter, r *http.Request, contentPath 
 		// mutable namespaces such as /ipns/ can't be cached forever
 
 		/* For now we set Last-Modified to Now() to leverage caching heuristics built into modern browsers:
-		 * https://github.com/ipfs/kubo/pull/8074#pullrequestreview-645196768
+		 * https://github.com/xbradylee/ipfs-kubo/pull/8074#pullrequestreview-645196768
 		 * but we should not set it to fake values and use Cache-Control based on TTL instead */
 		modtime = time.Now()
 
-		// TODO: set Cache-Control based on TTL of IPNS/DNSLink: https://github.com/ipfs/kubo/issues/1818#issuecomment-1015849462
+		// TODO: set Cache-Control based on TTL of IPNS/DNSLink: https://github.com/xbradylee/ipfs-kubo/issues/1818#issuecomment-1015849462
 		// TODO: set Last-Modified based on /ipns/ publishing timestamp?
 	} else {
 		// immutable! CACHE ALL THE THINGS, FOREVER! wolololol
@@ -664,7 +664,7 @@ func addCacheControlHeaders(w http.ResponseWriter, r *http.Request, contentPath 
 		// Set modtime to 'zero time' to disable Last-Modified header (superseded by Cache-Control)
 		modtime = noModtime
 
-		// TODO: set Last-Modified? - TBD - /ipfs/ modification metadata is present in unixfs 1.5 https://github.com/ipfs/kubo/issues/6920?
+		// TODO: set Last-Modified? - TBD - /ipfs/ modification metadata is present in unixfs 1.5 https://github.com/xbradylee/ipfs-kubo/issues/6920?
 	}
 
 	return modtime
@@ -862,7 +862,7 @@ func getEtag(r *http.Request, cid cid.Cid) string {
 		// Etag: "cid.shortFmt" (gives us nice compression together with Content-Disposition in block (raw) and car responses)
 		suffix = `.` + shortFormat + suffix
 	}
-	// TODO: include selector suffix when https://github.com/ipfs/kubo/issues/8769 lands
+	// TODO: include selector suffix when https://github.com/xbradylee/ipfs-kubo/issues/8769 lands
 	return prefix + cid.String() + suffix
 }
 
@@ -987,10 +987,10 @@ func (i *gatewayHandler) handleOnlyIfCached(w http.ResponseWriter, r *http.Reque
 }
 
 func handleUnsupportedHeaders(r *http.Request) (err *requestError) {
-	// X-Ipfs-Gateway-Prefix was removed (https://github.com/ipfs/kubo/issues/7702)
+	// X-Ipfs-Gateway-Prefix was removed (https://github.com/xbradylee/ipfs-kubo/issues/7702)
 	// TODO: remove this after  go-ipfs 0.13 ships
 	if prfx := r.Header.Get("X-Ipfs-Gateway-Prefix"); prfx != "" {
-		err := fmt.Errorf("X-Ipfs-Gateway-Prefix support was removed: https://github.com/ipfs/kubo/issues/7702")
+		err := fmt.Errorf("X-Ipfs-Gateway-Prefix support was removed: https://github.com/xbradylee/ipfs-kubo/issues/7702")
 		return newRequestError("unsupported HTTP header", err, http.StatusBadRequest)
 	}
 	return nil
@@ -1026,7 +1026,7 @@ func handleProtocolHandlerRedirect(w http.ResponseWriter, r *http.Request, logge
 }
 
 // Disallow Service Worker registration on namespace roots
-// https://github.com/ipfs/kubo/issues/4025
+// https://github.com/xbradylee/ipfs-kubo/issues/4025
 func handleServiceWorkerRegistration(r *http.Request) (err *requestError) {
 	if r.Header.Get("Service-Worker") == "script" {
 		matched, _ := regexp.MatchString(`^/ip[fn]s/[^/]+$`, r.URL.Path)

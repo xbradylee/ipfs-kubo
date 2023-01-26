@@ -6,9 +6,9 @@ package node
 import (
 	"errors"
 
-	core "github.com/ipfs/kubo/core"
+	core "github.com/xbradylee/ipfs-kubo/core"
 )
 
 func Mount(node *core.IpfsNode, fsdir, nsdir string) error {
-	return errors.New("FUSE not supported on OpenBSD or NetBSD. See #5334 (https://github.com/ipfs/kubo/issues/5334).")
+	return errors.New("FUSE not supported on OpenBSD or NetBSD. See #5334 (https://github.com/xbradylee/ipfs-kubo/issues/5334).")
 }

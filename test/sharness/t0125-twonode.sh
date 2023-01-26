@@ -82,7 +82,7 @@ flaky_advanced_test() {
 
 run_advanced_test() {
   # TODO: investigate why flaky_advanced_test is flaky
-  # Context: https://github.com/ipfs/kubo/pull/9486
+  # Context: https://github.com/xbradylee/ipfs-kubo/pull/9486
   # sometimes, bitswap status returns  unexpected block transfers
   # and everyone has been re-running circleci until is passes for at least a year.
   # this re-runs test until it passes or a timeout hits

@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/ipfs/kubo/test/cli/harness"
+	"github.com/xbradylee/ipfs-kubo/test/cli/harness"
 )
 
 func TestStats(t *testing.T) {

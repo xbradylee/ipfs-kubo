@@ -368,7 +368,7 @@ jobs:
             - ~/.cache/ms-playwright
             - ~/ipfs/kubo/.cache/npm
   # We only run build as a test here. DockerHub images are built and published
-  # by GitHub Action now: https://github.com/ipfs/kubo/pull/8467
+  # by GitHub Action now: https://github.com/xbradylee/ipfs-kubo/pull/8467
   docker-build:
     executor: dockerizer
     steps:

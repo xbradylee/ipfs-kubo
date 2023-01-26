@@ -1,4 +1,4 @@
-module github.com/ipfs/kubo/examples/kubo-as-a-library
+module github.com/xbradylee/ipfs-kubo/examples/kubo-as-a-library
 
 go 1.18
 

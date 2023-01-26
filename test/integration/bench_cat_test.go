@@ -9,14 +9,14 @@ import (
 	"testing"
 
 	"github.com/ipfs/go-libipfs/files"
-	"github.com/ipfs/kubo/core"
-	"github.com/ipfs/kubo/core/bootstrap"
-	"github.com/ipfs/kubo/core/coreapi"
-	mock "github.com/ipfs/kubo/core/mock"
-	"github.com/ipfs/kubo/thirdparty/unit"
 	testutil "github.com/libp2p/go-libp2p-testing/net"
 	"github.com/libp2p/go-libp2p/core/peer"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
+	"github.com/xbradylee/ipfs-kubo/core"
+	"github.com/xbradylee/ipfs-kubo/core/bootstrap"
+	"github.com/xbradylee/ipfs-kubo/core/coreapi"
+	mock "github.com/xbradylee/ipfs-kubo/core/mock"
+	"github.com/xbradylee/ipfs-kubo/thirdparty/unit"
 )
 
 func BenchmarkCat1MB(b *testing.B) { benchmarkVarCat(b, unit.MB*1) }

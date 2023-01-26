@@ -15,7 +15,7 @@ This process handles patch releases from version `vX.Y.Z` to `vX.Y.Z+1` assuming
   2. Wait for PR to build artifacts and generate diff
   3. Inspect results, merge if CI is green and the diff looks ok
   4. Wait for `master` branch to build and update DNSLink at https://dist.ipfs.tech
-- [ ] Cut a release on [github](https://github.com/ipfs/kubo/releases) and reuse signed artifacts from https://dist.ipfs.tech/kubo (run [sync-release-assets.yml workflow](https://github.com/ipfs/kubo/actions/workflows/sync-release-assets.yml)).
+- [ ] Cut a release on [github](https://github.com/xbradylee/ipfs-kubo/releases) and reuse signed artifacts from https://dist.ipfs.tech/kubo (run [sync-release-assets.yml workflow](https://github.com/xbradylee/ipfs-kubo/actions/workflows/sync-release-assets.yml)).
 - [ ] Announce the Release:
   - [ ] On [discuss.ipfs.tech](https://discuss.ipfs.tech)
     - This will automatically post to Matrix (`#lobby:ipfs.io`) and IPFS Discord (`#ipfs-chatter`)
@@ -24,7 +24,7 @@ This process handles patch releases from version `vX.Y.Z` to `vX.Y.Z+1` assuming
 - [ ] Release published
   - [ ] to [dist.ipfs.tech](https://dist.ipfs.tech)
   - [ ] to [npm-go-ipfs](https://www.npmjs.com/package/go-ipfs) (should be done by [ipfs/npm-go-ipfs](https://github.com/ipfs/npm-go-ipfs), but ok to dispatch [this job](https://github.com/ipfs/npm-go-ipfs/actions/workflows/main.yml) manually)
-  - [ ] to [github](https://github.com/ipfs/kubo/releases)
+  - [ ] to [github](https://github.com/xbradylee/ipfs-kubo/releases)
   - [ ] to [arch](https://www.archlinux.org/packages/community/x86_64/go-ipfs/) (flag it out of date)
 - [ ] Cut a new ipfs-desktop release
 - [ ] Merge the `release` branch back into `master`, ignoring the changes to `version.go` (keep the `-dev` version from master).

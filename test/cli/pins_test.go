@@ -6,10 +6,10 @@ import (
 	"testing"
 
 	"github.com/ipfs/go-cid"
-	"github.com/ipfs/kubo/test/cli/harness"
-	. "github.com/ipfs/kubo/test/cli/testutils"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/xbradylee/ipfs-kubo/test/cli/harness"
+	. "github.com/xbradylee/ipfs-kubo/test/cli/testutils"
 )
 
 type testPinsArgs struct {

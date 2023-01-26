@@ -25,8 +25,8 @@ import (
 	"github.com/ipld/go-ipld-prime/schema"
 	"go.uber.org/fx"
 
-	"github.com/ipfs/kubo/core/node/helpers"
-	"github.com/ipfs/kubo/repo"
+	"github.com/xbradylee/ipfs-kubo/core/node/helpers"
+	"github.com/xbradylee/ipfs-kubo/repo"
 )
 
 // BlockService creates new blockservice which provides an interface to fetch content-addressable blocks

@@ -144,7 +144,7 @@ test_kill_ipfs_daemon
 
 # TODO: /api/v0 with CORS headers set in API.HTTPHeaders  does not really work,
 # as not all headers are correctly set. Below is only a basic regression test that documents
-# current state. Fixing CORS on /api/v0 (RPC and Gateway port) is tracked in https://github.com/ipfs/kubo/issues/7667
+# current state. Fixing CORS on /api/v0 (RPC and Gateway port) is tracked in https://github.com/xbradylee/ipfs-kubo/issues/7667
 
 test_expect_success "Manually set API.HTTPHeaders config to be as relaxed as Gateway.HTTPHeaders" "
   ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '[\"https://example.com\"]'

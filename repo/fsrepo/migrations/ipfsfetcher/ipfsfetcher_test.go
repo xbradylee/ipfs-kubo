@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/ipfs/kubo/plugin/loader"
-	"github.com/ipfs/kubo/repo/fsrepo/migrations"
+	"github.com/xbradylee/ipfs-kubo/plugin/loader"
+	"github.com/xbradylee/ipfs-kubo/repo/fsrepo/migrations"
 )
 
 func init() {

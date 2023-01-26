@@ -10,9 +10,9 @@ import (
 	blocks "github.com/ipfs/go-libipfs/blocks"
 	coreiface "github.com/ipfs/interface-go-ipfs-core"
 	ipath "github.com/ipfs/interface-go-ipfs-core/path"
-	"github.com/ipfs/kubo/tracing"
 	gocar "github.com/ipld/go-car"
 	selectorparse "github.com/ipld/go-ipld-prime/traversal/selector/parse"
+	"github.com/xbradylee/ipfs-kubo/tracing"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -71,7 +71,7 @@ func (i *gatewayHandler) serveCAR(ctx context.Context, w http.ResponseWriter, r 
 	// Same go-car settings as dag.export command
 	store := dagStore{dag: i.api.Dag(), ctx: ctx}
 
-	// TODO: support selectors passed as request param: https://github.com/ipfs/kubo/issues/8769
+	// TODO: support selectors passed as request param: https://github.com/xbradylee/ipfs-kubo/issues/8769
 	dag := gocar.Dag{Root: rootCid, Selector: selectorparse.CommonSelector_ExploreAllRecursively}
 	car := gocar.NewSelectiveCar(ctx, store, []gocar.Dag{dag}, gocar.TraverseLinksOnlyOnce())
 

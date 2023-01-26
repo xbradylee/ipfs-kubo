@@ -9,10 +9,10 @@ import (
 	"strings"
 	"sync"
 
-	core "github.com/ipfs/kubo/core"
-	ipns "github.com/ipfs/kubo/fuse/ipns"
-	mount "github.com/ipfs/kubo/fuse/mount"
-	rofs "github.com/ipfs/kubo/fuse/readonly"
+	core "github.com/xbradylee/ipfs-kubo/core"
+	ipns "github.com/xbradylee/ipfs-kubo/fuse/ipns"
+	mount "github.com/xbradylee/ipfs-kubo/fuse/mount"
+	rofs "github.com/xbradylee/ipfs-kubo/fuse/readonly"
 
 	logging "github.com/ipfs/go-log"
 )

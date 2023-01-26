@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/ipfs/kubo/test/cli/harness"
-	. "github.com/ipfs/kubo/test/cli/testutils"
 	"github.com/stretchr/testify/assert"
+	"github.com/xbradylee/ipfs-kubo/test/cli/harness"
+	. "github.com/xbradylee/ipfs-kubo/test/cli/testutils"
 )
 
 func TestBashCompletion(t *testing.T) {

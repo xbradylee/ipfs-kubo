@@ -19,9 +19,9 @@ import (
 	options "github.com/ipfs/interface-go-ipfs-core/options"
 	"github.com/ipfs/interface-go-ipfs-core/path"
 
-	core "github.com/ipfs/kubo/core"
-	cmdenv "github.com/ipfs/kubo/core/commands/cmdenv"
-	e "github.com/ipfs/kubo/core/commands/e"
+	core "github.com/xbradylee/ipfs-kubo/core"
+	cmdenv "github.com/xbradylee/ipfs-kubo/core/commands/cmdenv"
+	e "github.com/xbradylee/ipfs-kubo/core/commands/e"
 )
 
 var PinCmd = &cmds.Command{

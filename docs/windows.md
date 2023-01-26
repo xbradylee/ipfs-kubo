@@ -117,13 +117,13 @@ Clone and change directory to the source code, if you haven't already:
 CMD:
 ```bat
 git clone https://github.com/ipfs/kubo %GOPATH%/src/github.com/ipfs/kubo
-cd %GOPATH%/src/github.com/ipfs/kubo/cmd/ipfs
+cd %GOPATH%/src/github.com/xbradylee/ipfs-kubo/cmd/ipfs
 ```
 
 PowerShell:
 ```powershell
 git clone https://github.com/ipfs/kubo $env:GOPATH/src/github.com/ipfs/kubo
-cd $env:GOPATH/src/github.com/ipfs/kubo/cmd/ipfs
+cd $env:GOPATH/src/github.com/xbradylee/ipfs-kubo/cmd/ipfs
 ```
 
 We need the `git` commit hash to be included in our build so that in the extremely rare event a bug is found, we have a reference point later for tracking it. We'll ask `git` for it and store it in a variable. The syntax for the next command is different depending on whether you're using the interactive command line or writing a batch file. Use the one that applies to you.  
@@ -155,4 +155,4 @@ If you get authentication problems with Git, you might want to take a look at ht
 - **Anything else**  
 Please search [https://discuss.ipfs.io](https://discuss.ipfs.io/search?q=windows%20category%3A13) for any additional issues you may encounter. If you can't find any existing resolution, feel free to post a question asking for help.
 
-If you encounter a bug with `kubo` itself (not related to building) please use the [issue tracker](https://github.com/ipfs/kubo/issues) to report it.
+If you encounter a bug with `kubo` itself (not related to building) please use the [issue tracker](https://github.com/xbradylee/ipfs-kubo/issues) to report it.

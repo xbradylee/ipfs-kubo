@@ -19,9 +19,9 @@ import (
 	"go.opencensus.io/stats/view"
 	"go.uber.org/fx"
 
-	"github.com/ipfs/kubo/config"
-	"github.com/ipfs/kubo/core/node/helpers"
-	"github.com/ipfs/kubo/repo"
+	"github.com/xbradylee/ipfs-kubo/config"
+	"github.com/xbradylee/ipfs-kubo/core/node/helpers"
+	"github.com/xbradylee/ipfs-kubo/repo"
 )
 
 const NetLimitDefaultFilename = "limit.json"

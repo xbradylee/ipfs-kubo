@@ -6,7 +6,7 @@ import (
 	"time"
 
 	version "github.com/ipfs/kubo"
-	config "github.com/ipfs/kubo/config"
+	config "github.com/xbradylee/ipfs-kubo/config"
 
 	logging "github.com/ipfs/go-log"
 	"github.com/libp2p/go-libp2p"

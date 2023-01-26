@@ -7,12 +7,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ipfs/kubo/test/cli/harness"
-	. "github.com/ipfs/kubo/test/cli/testutils"
 	pb "github.com/libp2p/go-libp2p/core/crypto/pb"
 	"github.com/libp2p/go-libp2p/core/peer"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"github.com/xbradylee/ipfs-kubo/test/cli/harness"
+	. "github.com/xbradylee/ipfs-kubo/test/cli/testutils"
 )
 
 func validatePeerID(t *testing.T, peerID peer.ID, expErr error, expAlgo pb.KeyType) {

@@ -46,7 +46,7 @@ test_expect_success 'add new CID to the local datastore' '
   ADD_CID=$(date +"%FT%T.%N%z" | ipfs add -q)
 '
 
-# cid.contact supports GET-only: https://github.com/ipfs/kubo/issues/9504
+# cid.contact supports GET-only: https://github.com/xbradylee/ipfs-kubo/issues/9504
 # which means no announcements over HTTP should be made.
 test_expect_success 'expect no HTTP requests to be sent with locally added CID' '
   test_should_not_contain "$ADD_CID" http_requests

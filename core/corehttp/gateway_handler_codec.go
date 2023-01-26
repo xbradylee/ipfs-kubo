@@ -13,12 +13,12 @@ import (
 	cid "github.com/ipfs/go-cid"
 	ipldlegacy "github.com/ipfs/go-ipld-legacy"
 	ipath "github.com/ipfs/interface-go-ipfs-core/path"
-	"github.com/ipfs/kubo/assets"
-	dih "github.com/ipfs/kubo/assets/dag-index-html"
-	"github.com/ipfs/kubo/tracing"
 	"github.com/ipld/go-ipld-prime"
 	"github.com/ipld/go-ipld-prime/multicodec"
 	mc "github.com/multiformats/go-multicodec"
+	"github.com/xbradylee/ipfs-kubo/assets"
+	dih "github.com/xbradylee/ipfs-kubo/assets/dag-index-html"
+	"github.com/xbradylee/ipfs-kubo/tracing"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -64,7 +64,7 @@ func (i *gatewayHandler) serveCodec(ctx context.Context, w http.ResponseWriter, 
 
 	// If the resolved path still has some remainder, return error for now.
 	// TODO: handle this when we have IPLD Patch (https://ipld.io/specs/patch/) via HTTP PUT
-	// TODO: (depends on https://github.com/ipfs/kubo/issues/4801 and https://github.com/ipfs/kubo/issues/4782)
+	// TODO: (depends on https://github.com/xbradylee/ipfs-kubo/issues/4801 and https://github.com/xbradylee/ipfs-kubo/issues/4782)
 	if resolvedPath.Remainder() != "" {
 		path := strings.TrimSuffix(resolvedPath.String(), resolvedPath.Remainder())
 		err := fmt.Errorf("%q of %q could not be returned: reading IPLD Kinds other than Links (CBOR Tag 42) is not implemented: try reading %q instead", resolvedPath.Remainder(), resolvedPath.String(), path)

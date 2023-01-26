@@ -4,7 +4,7 @@ import (
 	cid "github.com/ipfs/go-cid"
 	dag "github.com/ipfs/go-merkledag"
 	ft "github.com/ipfs/go-unixfs"
-	core "github.com/ipfs/kubo/core"
+	core "github.com/xbradylee/ipfs-kubo/core"
 )
 
 func AddMetadataTo(n *core.IpfsNode, skey string, m *ft.Metadata) (string, error) {

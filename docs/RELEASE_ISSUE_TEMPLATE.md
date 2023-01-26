@@ -1,6 +1,6 @@
-<!-- Last updated by @galargh during [0.17.0 release](https://github.com/ipfs/kubo/issues/9319) -->
+<!-- Last updated by @galargh during [0.17.0 release](https://github.com/xbradylee/ipfs-kubo/issues/9319) -->
 
-> Release Issue Template.  If doing a patch release, see [here](https://github.com/ipfs/kubo/blob/master/docs/PATCH_RELEASE_TEMPLATE.md)
+> Release Issue Template.  If doing a patch release, see [here](https://github.com/xbradylee/ipfs-kubo/blob/master/docs/PATCH_RELEASE_TEMPLATE.md)
 
 # Items to do upon creating the release issue
 - [ ] Fill in the Meta section
@@ -14,7 +14,7 @@
 * Release reviewer: @who
 * Expected RC date: week of YYYY-MM-DD
 * 🚢 Expected final release date: YYYY-MM-DD
-* Accompanying PR for improving the release process: (example: https://github.com/ipfs/kubo/pull/9391)
+* Accompanying PR for improving the release process: (example: https://github.com/xbradylee/ipfs-kubo/pull/9391)
 
 See the [Kubo release process](https://pl-strflt.notion.site/Kubo-Release-Process-5a5d066264704009a28a79cff93062c4) for more info.
 
@@ -54,7 +54,7 @@ Checklist:
   - [ ] Access to [#shared-pl-marketing-requests](https://filecoinproject.slack.com/archives/C018EJ8LWH1) channel in FIL Slack will be required to request social shares. Ask the release reviewer to invite you over.
   - [ ] After the release is deployed to our internal infrastructure, you're going to need read access to [IPFS network metrics](https://github.com/protocol/pldw/blob/624f47cf4ec14ad2cec6adf601a9f7b203ef770d/docs/sources/ipfs.md#ipfs-network-metrics) dashboards. Open an access request in https://github.com/protocol/pldw/issues/new/choose if you don't have it yet ([example](https://github.com/protocol/pldw/issues/158)).
   - [ ] You're also going to need NPM installed on your system. See [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) for instructions.
-  - [ ] Prepare changelog proposal in [docs/changelogs/vX.Y.md](https://github.com/ipfs/kubo/blob/master/docs/changelogs/).
+  - [ ] Prepare changelog proposal in [docs/changelogs/vX.Y.md](https://github.com/xbradylee/ipfs-kubo/blob/master/docs/changelogs/).
     - Skip filling out the `### Changelog` section (the one where which lists all the commits and contributors) for now. We will populate it after the release branch is cut.
     - PR link:
   - [ ] Ensure the new changelog is linked in the [CHANGELOG.md](CHANGELOG.md) file.
@@ -66,15 +66,15 @@ Checklist:
   - [ ] Upgrade to the latest patch release of Go that CircleCI has published (currently used version: `1.19.1`)
     - [ ] See the list here: https://hub.docker.com/r/cimg/go/tags
     - [ ] [ipfs/distributions](https://github.com/ipfs/distributions): bump [this version](https://github.com/ipfs/distributions/blob/master/.tool-versions#L2)
-    - [ ] [ipfs/kubo](https://github.com/ipfs/kubo): [example PR](https://github.com/ipfs/kubo/pull/8599)
+    - [ ] [ipfs/kubo](https://github.com/ipfs/kubo): [example PR](https://github.com/xbradylee/ipfs-kubo/pull/8599)
     - [ ] [ipfs/ipfs-docs](https://github.com/ipfs/ipfs-docs): [example PR](https://github.com/ipfs/ipfs-docs/pull/1298) - only if the major version changed
   - [ ] Fork a new branch (`release-vX.Y.Z`) from `master`.
-  - [ ] Bump the version in `version.go` in the `master` branch to `vX.(Y+1).0-dev` via a PR ([example](https://github.com/ipfs/kubo/pull/9305)).
+  - [ ] Bump the version in `version.go` in the `master` branch to `vX.(Y+1).0-dev` via a PR ([example](https://github.com/xbradylee/ipfs-kubo/pull/9305)).
 - [ ] **Stage 2 - Release Candidate** - _if any [non-trivial](docs/releases.md#footnotes) changes need to be included in the release, return to this stage_
   - [ ] If it's not a first RC, add new commits to the `release-vX.Y.Z` branch from `master` using `git cherry-pick -x ...`
       - Note: `release-*` branches are protected. You can do all needed updates on a separated branch (e.g. `wip-release-vX.Y.Z`) and when everything is settled push to `release-vX.Y.Z`
   - [ ] Bump the version in `version.go` in the `release-vX.Y.Z` branch to `vX.Y.Z-rcN`.
-  - [ ] If it's a first RC, create a draft PR targetting `release` branch if it doesn't exist yet ([example](https://github.com/ipfs/kubo/pull/9306)).
+  - [ ] If it's a first RC, create a draft PR targetting `release` branch if it doesn't exist yet ([example](https://github.com/xbradylee/ipfs-kubo/pull/9306)).
   - [ ] Wait for CI to run and complete PR checks. All checks should pass.
   - [ ] Create a signed tag for the release candidate.
     - [ ] This is a dangerous operation, as it is difficult to reverse due to Go modules and automated Docker image publishing. Remember to verify the commands you intend to run for items marked with ⚠️ with the release reviewer.
@@ -94,12 +94,12 @@ Checklist:
       - `master` build will publish the artifacts to https://dist.ipfs.io in around 30 minutes
     - [ ] Ensure that the artifacts are available at https://dist.ipfs.io
   - [ ] Publish the RC to [the NPM package](https://www.npmjs.com/package/go-ipfs?activeTab=versions) by running https://github.com/ipfs/npm-go-ipfs/actions/workflows/main.yml (it happens automatically but it is safe to speed up the process and kick of a run manually)
-  - [ ] Cut a pre-release on [GitHub](https://github.com/ipfs/kubo/releases) ([instructions](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release), [example](https://github.com/ipfs/kubo/releases/tag/v0.17.0-rc1))
+  - [ ] Cut a pre-release on [GitHub](https://github.com/xbradylee/ipfs-kubo/releases) ([instructions](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release), [example](https://github.com/xbradylee/ipfs-kubo/releases/tag/v0.17.0-rc1))
     - Use `vX.Y.Z-rcN` as the tag.
     - Link to the release issue in the description.
-    - Link to the relevant [changelog](https://github.com/ipfs/kubo/blob/master/docs/changelogs/) in the description.
+    - Link to the relevant [changelog](https://github.com/xbradylee/ipfs-kubo/blob/master/docs/changelogs/) in the description.
     - Check `This is a pre-release`.
-  - [ ] Synchronize release artifacts by running [sync-release-assets](https://github.com/ipfs/kubo/actions/workflows/sync-release-assets.yml) workflow.
+  - [ ] Synchronize release artifacts by running [sync-release-assets](https://github.com/xbradylee/ipfs-kubo/actions/workflows/sync-release-assets.yml) workflow.
   - [ ] Announce the RC
     - [ ] Create a new post on [IPFS Discourse](https://discuss.ipfs.tech). ([example](https://discuss.ipfs.tech/t/kubo-v0-16-0-rc1-release-candidate-is-out/15248))
       - Use `Kubo vX.Y.Z-rcn Release Candidate is out!` as the title.
@@ -112,7 +112,7 @@ Checklist:
       - [ ] IPFS Discord #ipfs-chatter
       - [ ] FIL Slack #ipfs-chatter
       - [ ] Matrix https://matrix.to/#/#ipfs-chatter:ipfs.io
-    - [ ] Mention [early testers](https://github.com/ipfs/go-ipfs/tree/master/docs/EARLY_TESTERS.md) in the comment under the release issue ([example](https://github.com/ipfs/kubo/issues/9319#issuecomment-1311002478)).
+    - [ ] Mention [early testers](https://github.com/ipfs/go-ipfs/tree/master/docs/EARLY_TESTERS.md) in the comment under the release issue ([example](https://github.com/xbradylee/ipfs-kubo/issues/9319#issuecomment-1311002478)).
 - [ ] **Stage 3 - Internal Testing**
   - [ ] Infrastructure Testing.
     - [ ] Update the issue against [bifrost-infra](https://github.com/protocol/bifrost-infra) ([example](https://github.com/protocol/bifrost-infra/issues/2109)).
@@ -157,7 +157,7 @@ Checklist:
       - [ ] Run `git show vX.Y.Z` to ensure the tag is correct.
       - [ ] ⚠️ Push the `vX.Y.Z` tag to GitHub (`git push origin vX.Y.Z`; DO NOT USE `git push --tags` because it pushes all your local tags).
   - [ ] Publish the release.
-    - [ ] Wait for [Publish docker image](https://github.com/ipfs/kubo/actions/workflows/docker-image.yml) workflow run initiated by the tag push to finish.
+    - [ ] Wait for [Publish docker image](https://github.com/xbradylee/ipfs-kubo/actions/workflows/docker-image.yml) workflow run initiated by the tag push to finish.
     - [ ] Add artifacts to https://dist.ipfs.tech by making a PR against [ipfs/distributions](https://github.com/ipfs/distributions)
       - [ ] Clone the `ipfs/distributions` repo locally.
       - [ ] Create a new branch (`kubo-release-vX.Y.Z`) from `master`.
@@ -170,11 +170,11 @@ Checklist:
         - `master` build will publish the artifacts to https://dist.ipfs.io in around 30 minutes
       - [ ] Ensure that the artifacts are available at https://dist.ipfs.io
     - [ ] Publish the release to [the NPM package](https://www.npmjs.com/package/go-ipfs?activeTab=versions) by running https://github.com/ipfs/npm-go-ipfs/actions/workflows/main.yml (it happens automatically but it is safe to speed up the process and kick of a run manually)
-  - [ ] Cut the release on [GitHub](https://github.com/ipfs/kubo/releases) ([instructions](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release), [example](https://github.com/ipfs/kubo/releases/tag/v0.17.0))
+  - [ ] Cut the release on [GitHub](https://github.com/xbradylee/ipfs-kubo/releases) ([instructions](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release), [example](https://github.com/xbradylee/ipfs-kubo/releases/tag/v0.17.0))
     - Use `vX.Y.Z` as the tag.
-    - Copy the relevant [changelog](https://github.com/ipfs/kubo/blob/release/docs/changelogs/) into the release description.
-    - Keep the release notes as trim as possible (e.g. remove top headers where possible, [example](https://github.com/ipfs/kubo/releases/tag/v0.17.0))
-  - [ ] Synchronize release artifacts by running [sync-release-assets](https://github.com/ipfs/kubo/actions/workflows/sync-release-assets.yml) workflow.
+    - Copy the relevant [changelog](https://github.com/xbradylee/ipfs-kubo/blob/release/docs/changelogs/) into the release description.
+    - Keep the release notes as trim as possible (e.g. remove top headers where possible, [example](https://github.com/xbradylee/ipfs-kubo/releases/tag/v0.17.0))
+  - [ ] Synchronize release artifacts by running [sync-release-assets](https://github.com/xbradylee/ipfs-kubo/actions/workflows/sync-release-assets.yml) workflow.
   - [ ] TODO: https://github.com/protocol/bifrost-infra/issues/2184#issuecomment-1315279257
   - [ ] Announce the release
     - [ ] Add a link to the release to this release issue as a comment.
@@ -189,7 +189,7 @@ Checklist:
       - [ ] IPFS Discord #ipfs-chatter
       - [ ] FIL Slack #ipfs-chatter
       - [ ] Matrix
-  - [ ] Add a link from release notes to Discuss post (like we did here: https://github.com/ipfs/kubo/releases/tag/v0.17.0)
+  - [ ] Add a link from release notes to Discuss post (like we did here: https://github.com/xbradylee/ipfs-kubo/releases/tag/v0.17.0)
   - [ ] Update the draft PR created for [interop](https://github.com/ipfs/interop) to use the new release and mark it as ready for review.
   - [ ] Update the draft PR created for [IPFS Desktop](https://github.com/ipfs-shipyard/ipfs-desktop) to use the new release and mark it as ready for review.
   - [ ] Update docs
@@ -199,7 +199,7 @@ Checklist:
     - [ ] Submit a request for blog post creation using [the form](https://airtable.com/shrNH8YWole1xc70I).
       - Title: Just released: Kubo X.Y.Z!
       - Link type: Release notes
-      - URL: https://github.com/ipfs/kubo/releases/tag/vX.Y.Z
+      - URL: https://github.com/xbradylee/ipfs-kubo/releases/tag/vX.Y.Z
     - [ ] The post is live on https://blog.ipfs.io
   - [ ] Share the link to the GitHub release
     - [ ] Twitter (request in Filecoin Slack channel #shared-pl-marketing-requests; [example](https://filecoinproject.slack.com/archives/C018EJ8LWH1/p1664903524843269?thread_ts=1664885305.374909&cid=C018EJ8LWH1))
@@ -213,6 +213,6 @@ Checklist:
 
 Would you like to contribute to the IPFS project and don't know how? Well, there are a few places you can get started:
 
-- Check the issues with the `help wanted` label in the [ipfs/kubo repo](https://github.com/ipfs/kubo/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)
+- Check the issues with the `help wanted` label in the [ipfs/kubo repo](https://github.com/xbradylee/ipfs-kubo/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)
 - Join the discussion at [discuss.ipfs.tech](https://discuss.ipfs.tech/) and help users finding their answers.
 - See other options at https://docs.ipfs.tech/community/

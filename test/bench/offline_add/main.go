@@ -8,9 +8,9 @@ import (
 	"path"
 	"testing"
 
-	"github.com/ipfs/kubo/thirdparty/unit"
+	"github.com/xbradylee/ipfs-kubo/thirdparty/unit"
 
-	config "github.com/ipfs/kubo/config"
+	config "github.com/xbradylee/ipfs-kubo/config"
 	random "github.com/jbenet/go-random"
 )
 

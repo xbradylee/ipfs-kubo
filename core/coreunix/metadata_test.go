@@ -11,7 +11,7 @@ import (
 	ft "github.com/ipfs/go-unixfs"
 	importer "github.com/ipfs/go-unixfs/importer"
 	uio "github.com/ipfs/go-unixfs/io"
-	core "github.com/ipfs/kubo/core"
+	core "github.com/xbradylee/ipfs-kubo/core"
 
 	cid "github.com/ipfs/go-cid"
 	ds "github.com/ipfs/go-datastore"

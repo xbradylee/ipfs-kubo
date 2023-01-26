@@ -20,9 +20,9 @@ import (
 	logging "github.com/ipfs/go-log"
 	pinclient "github.com/ipfs/go-pinning-service-http-client"
 	path "github.com/ipfs/interface-go-ipfs-core/path"
-	config "github.com/ipfs/kubo/config"
-	"github.com/ipfs/kubo/core/commands/cmdenv"
-	fsrepo "github.com/ipfs/kubo/repo/fsrepo"
+	config "github.com/xbradylee/ipfs-kubo/config"
+	"github.com/xbradylee/ipfs-kubo/core/commands/cmdenv"
+	fsrepo "github.com/xbradylee/ipfs-kubo/repo/fsrepo"
 	"github.com/libp2p/go-libp2p/core/host"
 	peer "github.com/libp2p/go-libp2p/core/peer"
 )
@@ -761,7 +761,7 @@ func normalizeEndpoint(endpoint string) (string, error) {
 		return "", fmt.Errorf("service endpoint must be a valid HTTP URL")
 	}
 
-	// cleanup trailing and duplicate slashes (https://github.com/ipfs/kubo/issues/7826)
+	// cleanup trailing and duplicate slashes (https://github.com/xbradylee/ipfs-kubo/issues/7826)
 	uri.Path = gopath.Clean(uri.Path)
 	uri.Path = strings.TrimSuffix(uri.Path, ".")
 	uri.Path = strings.TrimSuffix(uri.Path, "/")

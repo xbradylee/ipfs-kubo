@@ -2,7 +2,7 @@ package config
 
 import "time"
 
-const DefaultReproviderInterval = time.Hour * 22 // https://github.com/ipfs/kubo/pull/9326
+const DefaultReproviderInterval = time.Hour * 22 // https://github.com/xbradylee/ipfs-kubo/pull/9326
 const DefaultReproviderStrategy = "all"
 
 type Reprovider struct {

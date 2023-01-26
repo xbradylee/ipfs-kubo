@@ -11,8 +11,8 @@ import (
 	"github.com/ipfs/go-libipfs/files"
 	iface "github.com/ipfs/interface-go-ipfs-core"
 	"github.com/ipfs/interface-go-ipfs-core/options"
-	"github.com/ipfs/kubo/core/commands/cmdenv"
-	"github.com/ipfs/kubo/core/commands/cmdutils"
+	"github.com/xbradylee/ipfs-kubo/core/commands/cmdenv"
+	"github.com/xbradylee/ipfs-kubo/core/commands/cmdutils"
 
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	gocarv2 "github.com/ipld/go-car/v2"

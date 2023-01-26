@@ -15,8 +15,8 @@ import (
 	"github.com/ipfs/go-path/resolver"
 	options "github.com/ipfs/interface-go-ipfs-core/options"
 	ipath "github.com/ipfs/interface-go-ipfs-core/path"
-	"github.com/ipfs/kubo/assets"
-	"github.com/ipfs/kubo/tracing"
+	"github.com/xbradylee/ipfs-kubo/assets"
+	"github.com/xbradylee/ipfs-kubo/tracing"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 	"go.uber.org/zap"
@@ -44,7 +44,7 @@ func (i *gatewayHandler) serveDirectory(ctx context.Context, w http.ResponseWrit
 	// Ensure directory paths end with '/'
 	if originalURLPath[len(originalURLPath)-1] != '/' {
 		// don't redirect to trailing slash if it's go get
-		// https://github.com/ipfs/kubo/pull/3963
+		// https://github.com/xbradylee/ipfs-kubo/pull/3963
 		goget := r.URL.Query().Get("go-get") == "1"
 		if !goget {
 			suffix := "/"
@@ -83,7 +83,7 @@ func (i *gatewayHandler) serveDirectory(ctx context.Context, w http.ResponseWrit
 	}
 
 	// See statusResponseWriter.WriteHeader
-	// and https://github.com/ipfs/kubo/issues/7164
+	// and https://github.com/xbradylee/ipfs-kubo/issues/7164
 	// Note: this needs to occur before listingTemplate.Execute otherwise we get
 	// superfluous response.WriteHeader call from prometheus/client_golang
 	if w.Header().Get("Location") != "" {
@@ -137,7 +137,7 @@ func (i *gatewayHandler) serveDirectory(ctx context.Context, w http.ResponseWrit
 	}
 
 	// construct the correct back link
-	// https://github.com/ipfs/kubo/issues/1365
+	// https://github.com/xbradylee/ipfs-kubo/issues/1365
 	backLink := originalURLPath
 
 	// don't go further up than /ipfs/$hash/

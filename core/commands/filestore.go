@@ -8,9 +8,9 @@ import (
 
 	filestore "github.com/ipfs/go-filestore"
 	cmds "github.com/ipfs/go-ipfs-cmds"
-	core "github.com/ipfs/kubo/core"
-	cmdenv "github.com/ipfs/kubo/core/commands/cmdenv"
-	e "github.com/ipfs/kubo/core/commands/e"
+	core "github.com/xbradylee/ipfs-kubo/core"
+	cmdenv "github.com/xbradylee/ipfs-kubo/core/commands/cmdenv"
+	e "github.com/xbradylee/ipfs-kubo/core/commands/e"
 
 	"github.com/ipfs/go-cid"
 )

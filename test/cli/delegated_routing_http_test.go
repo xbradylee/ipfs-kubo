@@ -5,10 +5,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/ipfs/kubo/config"
-	"github.com/ipfs/kubo/test/cli/harness"
-	. "github.com/ipfs/kubo/test/cli/testutils"
 	"github.com/stretchr/testify/assert"
+	"github.com/xbradylee/ipfs-kubo/config"
+	"github.com/xbradylee/ipfs-kubo/test/cli/harness"
+	. "github.com/xbradylee/ipfs-kubo/test/cli/testutils"
 )
 
 func TestHTTPDelegatedRouting(t *testing.T) {

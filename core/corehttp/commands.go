@@ -10,14 +10,14 @@ import (
 	"strings"
 
 	version "github.com/ipfs/kubo"
-	oldcmds "github.com/ipfs/kubo/commands"
-	"github.com/ipfs/kubo/core"
-	corecommands "github.com/ipfs/kubo/core/commands"
+	oldcmds "github.com/xbradylee/ipfs-kubo/commands"
+	"github.com/xbradylee/ipfs-kubo/core"
+	corecommands "github.com/xbradylee/ipfs-kubo/core/commands"
 
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	cmdsHttp "github.com/ipfs/go-ipfs-cmds/http"
 	path "github.com/ipfs/go-path"
-	config "github.com/ipfs/kubo/config"
+	config "github.com/xbradylee/ipfs-kubo/config"
 )
 
 var (

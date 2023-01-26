@@ -13,12 +13,12 @@ import (
 	"time"
 
 	"github.com/ipfs/go-libipfs/files"
-	"github.com/ipfs/kubo/commands"
-	"github.com/ipfs/kubo/config"
-	"github.com/ipfs/kubo/core/commands/cmdenv"
-	"github.com/ipfs/kubo/core/node/libp2p"
-	"github.com/ipfs/kubo/repo"
-	"github.com/ipfs/kubo/repo/fsrepo"
+	"github.com/xbradylee/ipfs-kubo/commands"
+	"github.com/xbradylee/ipfs-kubo/config"
+	"github.com/xbradylee/ipfs-kubo/core/commands/cmdenv"
+	"github.com/xbradylee/ipfs-kubo/core/node/libp2p"
+	"github.com/xbradylee/ipfs-kubo/repo"
+	"github.com/xbradylee/ipfs-kubo/repo/fsrepo"
 
 	cmds "github.com/ipfs/go-ipfs-cmds"
 	inet "github.com/libp2p/go-libp2p/core/network"

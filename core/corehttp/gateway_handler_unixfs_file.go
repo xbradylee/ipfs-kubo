@@ -13,7 +13,7 @@ import (
 	"github.com/gabriel-vasile/mimetype"
 	"github.com/ipfs/go-libipfs/files"
 	ipath "github.com/ipfs/interface-go-ipfs-core/path"
-	"github.com/ipfs/kubo/tracing"
+	"github.com/xbradylee/ipfs-kubo/tracing"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
 )
@@ -63,7 +63,7 @@ func (i *gatewayHandler) serveFile(ctx context.Context, w http.ResponseWriter, r
 		ctype = mime.TypeByExtension(gopath.Ext(name))
 		if ctype == "" {
 			// uses https://github.com/gabriel-vasile/mimetype library to determine the content type.
-			// Fixes https://github.com/ipfs/kubo/issues/7252
+			// Fixes https://github.com/xbradylee/ipfs-kubo/issues/7252
 			mimeType, err := mimetype.DetectReader(content)
 			if err != nil {
 				http.Error(w, fmt.Sprintf("cannot detect content-type: %s", err.Error()), http.StatusInternalServerError)
@@ -80,7 +80,7 @@ func (i *gatewayHandler) serveFile(ctx context.Context, w http.ResponseWriter, r
 		// Strip the encoding from the HTML Content-Type header and let the
 		// browser figure it out.
 		//
-		// Fixes https://github.com/ipfs/kubo/issues/2203
+		// Fixes https://github.com/xbradylee/ipfs-kubo/issues/2203
 		if strings.HasPrefix(ctype, "text/html;") {
 			ctype = "text/html"
 		}

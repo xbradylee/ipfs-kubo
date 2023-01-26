@@ -9,8 +9,8 @@ import (
 	cid "github.com/ipfs/go-cid"
 	"github.com/ipfs/go-libipfs/files"
 	path "github.com/ipfs/go-path"
-	config "github.com/ipfs/kubo/config"
-	coreapi "github.com/ipfs/kubo/core/coreapi"
+	config "github.com/xbradylee/ipfs-kubo/config"
+	coreapi "github.com/xbradylee/ipfs-kubo/core/coreapi"
 )
 
 func TestToSubdomainURL(t *testing.T) {
@@ -62,7 +62,7 @@ func TestToSubdomainURL(t *testing.T) {
 		{httpRequest, "dweb.link", false, "/ipns/dnslink.long-name.example.com", "http://dnslink.long-name.example.com.ipns.dweb.link/", nil},
 		{httpsRequest, "dweb.link", false, "/ipns/dnslink.long-name.example.com", "https://dnslink-long--name-example-com.ipns.dweb.link/", nil},
 		{httpsProxiedRequest, "dweb.link", false, "/ipns/dnslink.long-name.example.com", "https://dnslink-long--name-example-com.ipns.dweb.link/", nil},
-		// HTTP requests can also be converted to fit into a single DNS label - https://github.com/ipfs/kubo/issues/9243
+		// HTTP requests can also be converted to fit into a single DNS label - https://github.com/xbradylee/ipfs-kubo/issues/9243
 		{httpRequest, "localhost", true, "/ipns/dnslink.long-name.example.com", "http://dnslink-long--name-example-com.ipns.localhost/", nil},
 		{httpRequest, "dweb.link", true, "/ipns/dnslink.long-name.example.com", "http://dnslink-long--name-example-com.ipns.dweb.link/", nil},
 	} {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/ipfs/kubo/test/cli/harness"
 	"github.com/stretchr/testify/assert"
+	"github.com/xbradylee/ipfs-kubo/test/cli/harness"
 )
 
 func TestPing(t *testing.T) {

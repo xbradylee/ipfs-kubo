@@ -7,10 +7,10 @@ import (
 
 	"github.com/ipfs/go-cid"
 	blocks "github.com/ipfs/go-libipfs/blocks"
-	"github.com/ipfs/kubo/core"
-	coremock "github.com/ipfs/kubo/core/mock"
-	"github.com/ipfs/kubo/core/node/libp2p"
 	mocknet "github.com/libp2p/go-libp2p/p2p/net/mock"
+	"github.com/xbradylee/ipfs-kubo/core"
+	coremock "github.com/xbradylee/ipfs-kubo/core/mock"
+	"github.com/xbradylee/ipfs-kubo/core/node/libp2p"
 )
 
 func TestBitswapWithoutRouting(t *testing.T) {

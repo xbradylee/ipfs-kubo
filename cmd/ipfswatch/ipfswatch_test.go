@@ -6,7 +6,7 @@ package main
 import (
 	"testing"
 
-	"github.com/ipfs/kubo/thirdparty/assert"
+	"github.com/xbradylee/ipfs-kubo/thirdparty/assert"
 )
 
 func TestIsHidden(t *testing.T) {

@@ -173,7 +173,7 @@ func (w *errRecordingResponseWriter) ReadFrom(r io.Reader) (n int64, err error) 
 	return n, err
 }
 
-func newGatewaySummaryMetric(name string, help string) *prometheus.SummaryVec {
+func newSummaryMetric(name string, help string) *prometheus.SummaryVec {
 	summaryMetric := prometheus.NewSummaryVec(
 		prometheus.SummaryOpts{
 			Namespace: "ipfs",
@@ -193,7 +193,7 @@ func newGatewaySummaryMetric(name string, help string) *prometheus.SummaryVec {
 	return summaryMetric
 }
 
-func newGatewayHistogramMetric(name string, help string) *prometheus.HistogramVec {
+func newHistogramMetric(name string, help string) *prometheus.HistogramVec {
 	// We can add buckets as a parameter in the future, but for now using static defaults
 	// suggested in https://github.com/ipfs/kubo/issues/8441
 	defaultBuckets := []float64{0.05, 0.1, 0.25, 0.5, 1, 2, 5, 10, 30, 60}
@@ -232,7 +232,7 @@ func newHandler(c Config, api NodeAPI, offlineAPI NodeAPI) *handler {
 		// ----------------------------
 		// Time till the first content block (bar in /ipfs/cid/foo/bar)
 		// (format-agnostic, across all response types)
-		firstContentBlockGetMetric: newGatewayHistogramMetric(
+		firstContentBlockGetMetric: newHistogramMetric(
 			"gw_first_content_block_get_latency_seconds",
 			"The time till the first content block is received on GET from the gateway.",
 		),
@@ -240,29 +240,29 @@ func newHandler(c Config, api NodeAPI, offlineAPI NodeAPI) *handler {
 		// Response-type specific metrics
 		// ----------------------------
 		// UnixFS: time it takes to return a file
-		unixfsFileGetMetric: newGatewayHistogramMetric(
+		unixfsFileGetMetric: newHistogramMetric(
 			"gw_unixfs_file_get_duration_seconds",
 			"The time to serve an entire UnixFS file from the gateway.",
 		),
 		// UnixFS: time it takes to generate static HTML with directory listing
-		unixfsGenDirGetMetric: newGatewayHistogramMetric(
+		unixfsGenDirGetMetric: newHistogramMetric(
 			"gw_unixfs_gen_dir_listing_get_duration_seconds",
 			"The time to serve a generated UnixFS HTML directory listing from the gateway.",
 		),
 		// CAR: time it takes to return requested CAR stream
-		carStreamGetMetric: newGatewayHistogramMetric(
+		carStreamGetMetric: newHistogramMetric(
 			"gw_car_stream_get_duration_seconds",
 			"The time to GET an entire CAR stream from the gateway.",
 		),
 		// Block: time it takes to return requested Block
-		rawBlockGetMetric: newGatewayHistogramMetric(
+		rawBlockGetMetric: newHistogramMetric(
 			"gw_raw_block_get_duration_seconds",
 			"The time to GET an entire raw Block from the gateway.",
 		),
 
 		// Legacy Metrics
 		// ----------------------------
-		unixfsGetMetric: newGatewaySummaryMetric( // TODO: remove?
+		unixfsGetMetric: newSummaryMetric( // TODO: remove?
 			// (deprecated, use firstContentBlockGetMetric instead)
 			"unixfs_get_latency_seconds",
 			"The time to receive the first UnixFS node on a GET from the gateway.",

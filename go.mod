@@ -243,6 +243,6 @@ require (
 	lukechampine.com/blake3 v1.1.7 // indirect
 )
 
-replace github.com/ipfs/kubo => ./
+replace github.com/ipfs/kubo => ../ipfs-kubo
 
 go 1.18
